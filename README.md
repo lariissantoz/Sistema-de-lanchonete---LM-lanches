@@ -13,6 +13,16 @@ da **UNI7**, sob orientação do professor Ronaldo Cysne.
 
 ---
 
+## 📸 Capturas de tela
+
+### Tela de login
+<img width="1228" height="770" alt="Captura de Tela 2026-06-11 às 18 25 07" src="https://github.com/user-attachments/assets/dc7c92a7-b3e3-4f73-8d9a-edff895a16b3" />
+
+
+### Painel de pedidos
+<img width="1228" height="770" alt="Captura de Tela 2026-06-11 às 18 29 24" src="https://github.com/user-attachments/assets/6d486bc3-65ba-47c6-832e-cd3f2e998fe9" />
+
+
 ## 👥 Equipe de desenvolvimento
 
 | Desenvolvedor(a)    | Responsabilidade                          |
