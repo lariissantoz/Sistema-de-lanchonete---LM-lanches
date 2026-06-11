@@ -8,7 +8,7 @@
 Sistema web para gerenciamento de pedidos de uma lanchonete, com operações
 completas de **CRUD** (criar, listar, atualizar e remover) e persistência de
 dados em **LocalStorage**. O projeto foi desenvolvido como 2ª Avaliação da
-disciplina de **Lógica de Programação** do curso de Sistemas de Informação
+disciplina de **codigo de alta performance web** do curso de Sistemas de Informação
 da **UNI7**, sob orientação do professor Ronaldo Cysne.
 
 ---
