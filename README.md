@@ -1,7 +1,7 @@
 # 🍔 Lanchonete LM — Sistema de Pedidos
 
 Sistema web de gerenciamento de pedidos de uma lanchonete, desenvolvido como
-2ª Avaliação da disciplina de Lógica de Programação (UNI7 — Sistemas de Informação).
+2ª Avaliação da disciplina codigo de alta performance web (UNI7 — Sistemas de Informação).
 
 Sistema desenvolvido por **LM Soluções Tecnológicas** © 2026 — Todos os direitos reservados.
 
@@ -52,3 +52,5 @@ lanchonete/
 Por se tratar de um projeto didático, as senhas dos usuários são armazenadas
 em texto puro no LocalStorage. Em um sistema real, elas seriam protegidas com
 criptografia (hash) e armazenadas em um servidor.
+
+Larissa Talmag e Mateus Talmag, responsaveis pelo desenevolvimento.
