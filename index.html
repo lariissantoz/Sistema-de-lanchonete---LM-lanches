@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lanchonete LM — Sistema de Pedidos</title>
+
+  <!-- Ícone da aba do navegador (favicon) -->
+  <link rel="icon" type="image/png" href="img/logo.png" />
+
+  <!-- Fontes do projeto (com fallback para fontes do sistema caso esteja offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Folha de estilo -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============ TELA DE LOGIN ============
+       Cobre o sistema até que um usuário entre ou crie uma conta.
+       Os usuários também ficam salvos no LocalStorage. -->
+  <div id="tela-login" class="login">
+    <div class="login__cartao">
+      <img src="img/logo.png" alt="Logotipo da Lanchonete LM" class="login__logo" />
+      <h2 id="login-titulo" class="login__titulo">Entrar no sistema</h2>
+
+      <!-- Formulário de LOGIN -->
+      <form id="form-login" autocomplete="off">
+        <div class="campo">
+          <label for="login-usuario">Usuário</label>
+          <input type="text" id="login-usuario" placeholder="Seu usuário" required />
+        </div>
+        <div class="campo">
+          <label for="login-senha">Senha</label>
+          <input type="password" id="login-senha" placeholder="Sua senha" required />
+        </div>
+        <p id="login-erro" class="login__erro escondido"></p>
+        <button type="submit" class="botao botao--primario">Entrar</button>
+        <p class="login__troca">
+          Não tem conta?
+          <button type="button" id="ir-cadastro" class="login__link">Criar conta</button>
+        </p>
+      </form>
+
+      <!-- Formulário de CADASTRO (escondido até clicar em "Criar conta") -->
+      <form id="form-cadastro" class="escondido" autocomplete="off">
+        <div class="campo">
+          <label for="cadastro-nome">Nome completo</label>
+          <input type="text" id="cadastro-nome" placeholder="Ex.: Maria Souza" required />
+        </div>
+        <div class="campo">
+          <label for="cadastro-usuario">Usuário</label>
+          <input type="text" id="cadastro-usuario" placeholder="Escolha um usuário" required />
+        </div>
+        <div class="campo">
+          <label for="cadastro-senha">Senha</label>
+          <input type="password" id="cadastro-senha" placeholder="Crie uma senha" required minlength="4" />
+        </div>
+        <p id="cadastro-erro" class="login__erro escondido"></p>
+        <button type="submit" class="botao botao--primario">Criar conta e entrar</button>
+        <p class="login__troca">
+          Já tem conta?
+          <button type="button" id="ir-login" class="login__link">Entrar</button>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notificação rápida exibida após cada ação (criar, salvar, remover) -->
+  <div id="toast" class="toast escondido"></div>
+
+  <!-- ============ CABEÇALHO ============ -->
+  <header class="topo">
+    <div class="topo__conteudo">
+      <div class="topo__marca">
+        <img src="img/logo.png" alt="Logotipo da Lanchonete LM" class="topo__logo" />
+        <div>
+          <h1 class="topo__titulo">Lanchonete LM</h1>
+          <p class="topo__subtitulo">Sabor &amp; Tradição</p>
+        </div>
+      </div>
+
+      <!-- Lado direito: relógio em tempo real e usuário logado -->
+      <div class="topo__usuario">
+        <span id="relogio" class="topo__relogio"></span>
+        <span class="topo__saudacao">Olá, <strong id="nome-usuario"></strong></span>
+        <button type="button" id="btn-sair" class="botao botao--sair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="painel">
+
+    <!-- ============ FORMULÁRIO (CREATE / UPDATE) ============ -->
+    <section class="cartao formulario" aria-labelledby="titulo-form">
+      <h2 id="titulo-form" class="cartao__titulo">Novo pedido</h2>
+
+      <form id="form-pedido" autocomplete="off">
+        <!-- Campo oculto: guarda o id do pedido quando estamos editando -->
+        <input type="hidden" id="pedido-id" />
+
+        <div class="campo">
+          <label for="cliente">Nome do cliente</label>
+          <input type="text" id="cliente" placeholder="Ex.: Maria Souza" required />
+        </div>
+
+        <!-- O lanche é escolhido em uma lista de opções pré-definidas -->
+        <div class="campo">
+          <label for="lanche">Lanche</label>
+          <select id="lanche" required>
+            <option value="" disabled selected>Selecione o lanche</option>
+            <option value="X-Burguer">X-Burguer — R$ 15,00</option>
+            <option value="X-Salada">X-Salada — R$ 17,00</option>
+            <option value="X-Bacon">X-Bacon — R$ 19,00</option>
+            <option value="X-Tudo">X-Tudo — R$ 24,00</option>
+            <option value="X-Frango">X-Frango — R$ 18,00</option>
+            <option value="Cachorro-Quente">Cachorro-Quente — R$ 12,00</option>
+            <option value="Misto Quente">Misto Quente — R$ 10,00</option>
+            <option value="Bauru">Bauru — R$ 16,00</option>
+          </select>
+        </div>
+
+        <!-- Quantidade: permite pedir mais de uma unidade do mesmo lanche -->
+        <div class="campo">
+          <label for="quantidade">Quantidade</label>
+          <input type="number" id="quantidade" min="1" max="50" value="1" required />
+        </div>
+
+        <!-- Ingredientes: o usuário digita e pressiona Enter (ou clica em Adicionar).
+             Cada ingrediente vira uma "etiqueta" que pode ser removida no X. -->
+        <div class="campo">
+          <label for="ingrediente">Ingredientes</label>
+          <div class="ingrediente-entrada">
+            <input type="text" id="ingrediente" placeholder="Digite e pressione Enter" />
+            <button type="button" id="btn-add-ingrediente" class="botao botao--claro">Adicionar</button>
+          </div>
+          <ul id="lista-ingredientes" class="etiquetas" aria-label="Ingredientes do pedido"></ul>
+        </div>
+
+        <div class="campo">
+          <label for="observacao">Observações <span class="opcional">(opcional)</span></label>
+          <input type="text" id="observacao" placeholder="Ex.: sem cebola, ponto da carne..." />
+        </div>
+
+        <!-- Status do pedido: acompanha o andamento na cozinha -->
+        <div class="campo">
+          <label for="status">Status do pedido</label>
+          <select id="status">
+            <option value="Em preparo" selected>Em preparo</option>
+            <option value="Pronto">Pronto</option>
+            <option value="Entregue">Entregue</option>
+          </select>
+        </div>
+
+        <div class="formulario__acoes">
+          <button type="submit" id="btn-salvar" class="botao botao--primario">Adicionar pedido</button>
+          <button type="button" id="btn-cancelar" class="botao botao--fantasma escondido">Cancelar edição</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ LISTAGEM (READ) ============ -->
+    <section class="lista-area" aria-labelledby="titulo-lista">
+
+      <!-- Painel de resumo: estatísticas calculadas em tempo real -->
+      <div class="resumo" aria-label="Resumo dos pedidos">
+        <div class="resumo__cartao">
+          <span id="stat-total" class="resumo__numero">0</span>
+          <span class="resumo__rotulo">Pedidos</span>
+        </div>
+        <div class="resumo__cartao">
+          <span id="stat-preparo" class="resumo__numero">0</span>
+          <span class="resumo__rotulo">Em preparo</span>
+        </div>
+        <div class="resumo__cartao">
+          <span id="stat-entregues" class="resumo__numero">0</span>
+          <span class="resumo__rotulo">Entregues</span>
+        </div>
+        <div class="resumo__cartao">
+          <span id="stat-vendas" class="resumo__numero">R$ 0,00</span>
+          <span class="resumo__rotulo">Total em vendas</span>
+        </div>
+      </div>
+
+      <div class="lista-area__cabecalho">
+        <h2 id="titulo-lista">Pedidos</h2>
+        <div class="lista-area__direita">
+          <button type="button" id="btn-exportar" class="botao botao--exportar">Exportar CSV</button>
+          <span id="contador-pedidos" class="contador">0 pedidos</span>
+        </div>
+      </div>
+
+      <!-- Busca: filtra os pedidos por cliente ou lanche enquanto digita.
+           Como um cliente pode ter vários pedidos, a busca pelo nome
+           mostra todos os pedidos dele de uma vez. -->
+      <div class="busca">
+        <input
+          type="search"
+          id="campo-busca"
+          placeholder="Pesquisar por cliente ou lanche..."
+          aria-label="Pesquisar pedidos"
+        />
+      </div>
+
+      <!-- Filtros rápidos por status: clique para ver só uma categoria -->
+      <div class="filtros" role="group" aria-label="Filtrar pedidos por status">
+        <button type="button" class="filtro filtro--ativo" data-status="Todos">Todos</button>
+        <button type="button" class="filtro" data-status="Em preparo">Em preparo</button>
+        <button type="button" class="filtro" data-status="Pronto">Prontos</button>
+        <button type="button" class="filtro" data-status="Entregue">Entregues</button>
+      </div>
+
+      <!-- Mensagem exibida quando não há pedidos salvos -->
+      <p id="estado-vazio" class="estado-vazio">
+        Nenhum pedido por aqui ainda. Preencha o formulário ao lado para registrar o primeiro!
+      </p>
+
+      <!-- Os cartões de pedido são gerados pelo JavaScript -->
+      <ul id="lista-pedidos" class="lista-pedidos"></ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>Sistema desenvolvido por <strong>LM Soluções Tecnológicas</strong> &copy; 2026 — Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Comportamento da aplicação -->
+  <script src="js/script.js"></script>
+</body>
+</html>

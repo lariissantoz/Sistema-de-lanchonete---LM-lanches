@@ -1,0 +1,690 @@
+/* ============================================================
+   Lanchonete LM — Folha de estilo
+   Paleta: tons de amarelo (mostarda, âmbar e creme) sobre fundo claro
+   ============================================================ */
+
+/* ---------- Variáveis de cor e tipografia ---------- */
+:root {
+  --marrom:         #713f12;   /* títulos e textos de destaque */
+  --ambar-escuro:   #d97706;   /* detalhes e foco dos campos */
+  --amarelo:        #facc15;   /* ações principais */
+  --amarelo-hover:  #eab308;   /* hover dos botões */
+  --amarelo-claro:  #fef3c7;   /* etiquetas e botões secundários */
+  --fundo:          #fffbeb;   /* fundo da página */
+  --branco:         #ffffff;
+  --texto:          #33291a;
+  --texto-suave:    #7d7158;
+  --vermelho:       #dc2626;   /* ação de remover */
+  --raio: 14px;
+  --sombra: 0 8px 24px rgba(113, 63, 18, 0.10);
+  --fonte-titulo: "Sora", "Segoe UI", sans-serif;
+  --fonte-texto:  "Inter", "Segoe UI", sans-serif;
+}
+
+/* ---------- Reset básico ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fonte-texto);
+  background: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  background: linear-gradient(120deg, var(--marrom), var(--ambar-escuro));
+  color: var(--branco);
+  padding: 24px;
+}
+
+.topo__conteudo {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.topo__marca {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Logotipo da lanchonete, exibido em formato circular */
+.topo__logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(250, 204, 21, 0.7);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Lado direito do cabeçalho: relógio, saudação e botão sair */
+.topo__usuario {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.topo__relogio {
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.18);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.topo__saudacao {
+  font-size: 0.9rem;
+}
+
+.botao--sair {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--branco);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.botao--sair:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.topo__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+  letter-spacing: 0.3px;
+}
+
+.topo__subtitulo {
+  font-size: 0.85rem;
+  color: #fde68a;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ---------- Layout principal (formulário + lista) ---------- */
+.painel {
+  max-width: 1040px;
+  width: 100%;
+  margin: 32px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  align-items: start;
+  flex: 1;
+}
+
+/* ---------- Cartões ---------- */
+.cartao {
+  background: var(--branco);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 24px;
+}
+
+.cartao__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+  color: var(--marrom);
+  margin-bottom: 18px;
+}
+
+/* ---------- Formulário ---------- */
+.campo {
+  margin-bottom: 16px;
+}
+
+.campo label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--marrom);
+}
+
+.opcional {
+  font-weight: 400;
+  color: var(--texto-suave);
+}
+
+/* Campos de texto, número e as listas de seleção */
+.campo input[type="text"],
+.campo input[type="number"],
+.campo select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #ead9a8;
+  border-radius: 10px;
+  font: inherit;
+  color: var(--texto);
+  background: #fffdf4;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo select {
+  cursor: pointer;
+}
+
+.campo input[type="text"]:focus,
+.campo input[type="number"]:focus,
+.campo select:focus {
+  outline: none;
+  border-color: var(--ambar-escuro);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.18);
+}
+
+/* Linha do campo de ingrediente: input + botão lado a lado */
+.ingrediente-entrada {
+  display: flex;
+  gap: 8px;
+}
+
+.ingrediente-entrada input {
+  flex: 1;
+}
+
+/* ---------- Etiquetas (chips) de ingredientes ---------- */
+.etiquetas {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--amarelo-claro);
+  color: var(--marrom);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 5px 6px 5px 12px;
+  border-radius: 999px;
+}
+
+/* Botão "x" que remove o ingrediente da etiqueta */
+.etiqueta__remover {
+  border: none;
+  background: rgba(113, 63, 18, 0.14);
+  color: var(--marrom);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.etiqueta__remover:hover {
+  background: var(--vermelho);
+  color: var(--branco);
+}
+
+/* ---------- Botões ---------- */
+.botao {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.botao:active {
+  transform: scale(0.98);
+}
+
+.botao--primario {
+  background: var(--amarelo);
+  color: var(--marrom);
+  width: 100%;
+}
+
+.botao--primario:hover {
+  background: var(--amarelo-hover);
+}
+
+.botao--claro {
+  background: var(--amarelo-claro);
+  color: var(--marrom);
+}
+
+.botao--claro:hover {
+  background: #fde68a;
+}
+
+.botao--fantasma {
+  background: transparent;
+  color: var(--texto-suave);
+  width: 100%;
+  margin-top: 8px;
+}
+
+.botao--fantasma:hover {
+  color: var(--vermelho);
+}
+
+.formulario__acoes {
+  margin-top: 20px;
+}
+
+/* ---------- Área da lista de pedidos ---------- */
+.lista-area__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.lista-area__cabecalho h2 {
+  font-family: var(--fonte-titulo);
+  color: var(--marrom);
+  font-size: 1.3rem;
+}
+
+.lista-area__direita {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.botao--exportar {
+  background: var(--branco);
+  color: var(--marrom);
+  border: 1.5px solid #ead9a8;
+  padding: 7px 14px;
+  font-size: 0.82rem;
+}
+
+.botao--exportar:hover {
+  border-color: var(--amarelo-hover);
+  background: var(--amarelo-claro);
+}
+
+.contador {
+  background: var(--marrom);
+  color: var(--branco);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.estado-vazio {
+  background: var(--branco);
+  border: 1.5px dashed #e3cf96;
+  border-radius: var(--raio);
+  padding: 32px;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+/* ---------- Campo de pesquisa de pedidos ---------- */
+.busca {
+  margin-bottom: 12px;
+}
+
+/* ---------- Painel de resumo (estatísticas) ---------- */
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.resumo__cartao {
+  background: var(--branco);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 3px solid var(--amarelo);
+}
+
+.resumo__numero {
+  font-family: var(--fonte-titulo);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--marrom);
+}
+
+.resumo__rotulo {
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+/* ---------- Filtros rápidos por status ---------- */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filtro {
+  border: 1.5px solid #ead9a8;
+  background: var(--branco);
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.filtro:hover {
+  border-color: var(--amarelo-hover);
+}
+
+.filtro--ativo {
+  background: var(--amarelo);
+  border-color: var(--amarelo);
+  color: var(--marrom);
+}
+
+.busca input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #ead9a8;
+  border-radius: 10px;
+  font: inherit;
+  color: var(--texto);
+  background: var(--branco);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.busca input:focus {
+  outline: none;
+  border-color: var(--ambar-escuro);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.18);
+}
+
+/* ---------- Etiqueta de status do pedido ----------
+   É um botão: clicar nela avança o pedido para o próximo status
+   (Em preparo -> Pronto -> Entregue). Cada status tem uma cor. */
+.pedido__topo-direita {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.status {
+  border: none;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter 0.2s, transform 0.1s;
+}
+
+.status:hover {
+  filter: brightness(0.95);
+}
+
+.status:active {
+  transform: scale(0.97);
+}
+
+.status--em-preparo {
+  background: var(--amarelo-claro);
+  color: #92400e;
+}
+
+.status--pronto {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status--entregue {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+/* ---------- Cartão de cada pedido ---------- */
+.lista-pedidos {
+  list-style: none;
+  display: grid;
+  gap: 16px;
+}
+
+.pedido {
+  background: var(--branco);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 18px 20px;
+  border-left: 5px solid var(--amarelo);
+  animation: surgir 0.25s ease;
+}
+
+/* Destaque quando o pedido está em edição */
+.pedido--editando {
+  border-left-color: #ea580c;
+  outline: 2px solid #fed7aa;
+}
+
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pedido__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pedido__lanche {
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+  color: var(--marrom);
+}
+
+.pedido__cliente {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin-top: 2px;
+}
+
+.pedido__hora {
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+.pedido__ingredientes {
+  margin-top: 12px;
+}
+
+.pedido__observacao {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  font-style: italic;
+}
+
+/* Valor total do pedido (preço do lanche x quantidade) */
+.pedido__preco {
+  margin-top: 12px;
+  font-family: var(--fonte-titulo);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--marrom);
+}
+
+.pedido__acoes {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.botao--editar {
+  background: var(--amarelo-claro);
+  color: var(--marrom);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.botao--editar:hover {
+  background: #fde68a;
+}
+
+.botao--remover {
+  background: #fee2e2;
+  color: var(--vermelho);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.botao--remover:hover {
+  background: #fecaca;
+}
+
+/* ---------- Tela de login ---------- */
+/* Camada que cobre o sistema inteiro até o usuário entrar */
+.login {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, var(--marrom), var(--ambar-escuro));
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.login__cartao {
+  background: var(--branco);
+  border-radius: var(--raio);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.login__logo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--amarelo);
+  margin-bottom: 12px;
+}
+
+.login__titulo {
+  font-family: var(--fonte-titulo);
+  color: var(--marrom);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.login__cartao form {
+  text-align: left;
+}
+
+.login__erro {
+  background: #fee2e2;
+  color: var(--vermelho);
+  font-size: 0.82rem;
+  padding: 9px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.login__troca {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin-top: 14px;
+}
+
+.login__link {
+  border: none;
+  background: none;
+  color: var(--ambar-escuro);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ---------- Notificação rápida (toast) ---------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--marrom);
+  color: var(--branco);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  z-index: 200;
+  animation: surgir 0.25s ease;
+}
+
+/* ---------- Atendente do pedido ---------- */
+.pedido__atendente {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+}
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+/* ---------- Utilidades ---------- */
+.escondido {
+  display: none;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 820px) {
+  .painel {
+    grid-template-columns: 1fr;
+  }
+
+  .resumo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Respeita usuários que preferem menos animação */
+@media (prefers-reduced-motion: reduce) {
+  .pedido {
+    animation: none;
+  }
+}
