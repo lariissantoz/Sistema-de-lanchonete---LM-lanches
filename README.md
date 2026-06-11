@@ -1,56 +1,96 @@
 # 🍔 Lanchonete LM — Sistema de Pedidos
 
-Sistema web de gerenciamento de pedidos de uma lanchonete, desenvolvido como
-2ª Avaliação da disciplina codigo de alta performance web (UNI7 — Sistemas de Informação).
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-success)
 
-Sistema desenvolvido por **LM Soluções Tecnológicas** © 2026 — Todos os direitos reservados.
+Sistema web para gerenciamento de pedidos de uma lanchonete, com operações
+completas de **CRUD** (criar, listar, atualizar e remover) e persistência de
+dados em **LocalStorage**. O projeto foi desenvolvido como 2ª Avaliação da
+disciplina de **Lógica de Programação** do curso de Sistemas de Informação
+da **UNI7**, sob orientação do professor Ronaldo Cysne.
+
+---
+
+## 👥 Equipe de desenvolvimento
+
+| Desenvolvedor(a)    | Responsabilidade                          |
+| ------------------- | ----------------------------------------- |
+| **Larissa Talmag**  | Desenvolvimento, design e documentação    |
+| **Mateus Talmag**   | Desenvolvimento, lógica e testes          |
+
+Projeto da **LM Soluções Tecnológicas** © 2026 — Todos os direitos reservados.
+
+---
 
 ## ✨ Funcionalidades
 
-- **CRUD completo de pedidos**: criar, listar, atualizar e remover, com persistência em LocalStorage
-- **Login e cadastro de usuários**, com sessão que permanece ativa ao recarregar a página
-- **Cardápio com preços**: ao escolher um lanche, seus ingredientes padrão são carregados automaticamente e podem ser incluídos ou excluídos livremente
-- **Quantidade por pedido**, com cálculo automático do valor total (preço × quantidade)
-- **Status do pedido** (Em preparo → Pronto → Entregue), alterável com um clique no cartão
-- **Pesquisa em tempo real** por cliente ou lanche e **filtros rápidos por status**
-- **Painel de estatísticas**: total de pedidos, em preparo, entregues e total em vendas (R$)
-- **Registro do atendente** que criou cada pedido
-- **Exportação dos pedidos em CSV** (abre no Excel)
-- Notificações rápidas (toast), relógio em tempo real e interface responsiva
+### Requisitos da avaliação
+- ✅ Interface construída em HTML semântico
+- ✅ Estilização em CSS (tema amarelo, layout responsivo)
+- ✅ Interatividade com JavaScript puro
+- ✅ Persistência de dados com LocalStorage
+- ✅ CRUD completo: criar, listar, atualizar e remover pedidos
+
+### Diferenciais implementados
+- 🔐 **Login e cadastro de usuários**, com sessão persistente e validações
+- 🧾 **Cardápio com preços**: ao escolher um lanche, os ingredientes padrão
+  são carregados e podem ser incluídos ou excluídos livremente
+- 🔢 **Quantidade por pedido**, com cálculo automático do valor total
+- 🚦 **Status do pedido** (Em preparo → Pronto → Entregue) alterável com um clique
+- 🔍 **Pesquisa em tempo real** por cliente ou lanche
+- 🏷️ **Filtros rápidos por status**
+- 📊 **Painel de estatísticas**: pedidos, em preparo, entregues e total em vendas
+- 🧑‍🍳 **Registro do atendente** responsável por cada pedido
+- 📁 **Exportação de relatório em CSV** (compatível com Excel)
+- 🔔 Notificações (toast), relógio em tempo real e identidade visual própria
+
+---
 
 ## 🚀 Como executar
 
-1. Baixe ou clone este repositório
+1. Baixe ou clone este repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/lanchonete-lm.git
+   ```
 2. Abra o arquivo `index.html` em qualquer navegador moderno
-   (ou use a extensão **Live Server** do VS Code)
+   (ou utilize a extensão **Live Server** do VS Code)
 3. Crie uma conta na tela inicial e comece a registrar pedidos
 
-Não é necessário instalar nada: o projeto usa apenas HTML, CSS e JavaScript puros,
-e os dados ficam salvos no LocalStorage do próprio navegador.
+> Não é necessário instalar dependências: o projeto utiliza apenas
+> HTML, CSS e JavaScript puros, e os dados ficam armazenados no
+> LocalStorage do próprio navegador.
+
+---
 
 ## 🗂️ Estrutura do projeto
 
 ```
 lanchonete/
 ├── index.html        # Estrutura da página (HTML semântico)
+├── README.md         # Documentação do projeto
 ├── css/
-│   └── style.css     # Estilização (tema amarelo)
+│   └── style.css     # Estilização (variáveis CSS, Grid e Flexbox)
 ├── js/
 │   └── script.js     # Lógica da aplicação (CRUD + LocalStorage)
 └── img/
     └── logo.png      # Logotipo da Lanchonete LM
 ```
 
-## 🛠️ Tecnologias
+---
 
-- HTML5 (estrutura semântica)
-- CSS3 (variáveis, Grid, Flexbox, responsividade)
-- JavaScript (manipulação do DOM, eventos, LocalStorage)
+## 🛠️ Tecnologias utilizadas
 
-## 📌 Observação
+- **HTML5** — estrutura semântica e acessibilidade
+- **CSS3** — variáveis, Grid, Flexbox e design responsivo
+- **JavaScript (ES6+)** — manipulação do DOM, eventos, arrow functions,
+  métodos de array (`map`, `filter`, `reduce`) e LocalStorage
+
+---
+
+## 🔒 Nota sobre segurança
 
 Por se tratar de um projeto didático, as senhas dos usuários são armazenadas
-em texto puro no LocalStorage. Em um sistema real, elas seriam protegidas com
-criptografia (hash) e armazenadas em um servidor.
-
-Larissa Talmag e Mateus Talmag, responsaveis pelo desenevolvimento.
+em texto puro no LocalStorage. Em uma aplicação real, elas seriam protegidas
+com criptografia (hash) e armazenadas em um servidor com autenticação adequada.
